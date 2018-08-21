@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: rabbitmq-consumer-two
+  rabbitmq:
+    host: 192.168.213.130
+    port: 5672
+    username: rabbit
+    password: 123456
+    publisher-confirms: true  #　开启发送方确认模式
+    virtual-host: /  # 代理服务器虚拟机地址
+
+
+server:
+  port: 8082
