@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 /***
- * 　消息被消费后　回调方法
+ * 　发送方确认模式 发消息
  */
 @Log
 @Component
@@ -19,7 +19,7 @@ public class CallBackSenderService implements RabbitTemplate.ConfirmCallback {
     RabbitTemplate rabbitTemplate;
 
     /**
-     * 发送消息  消费方收到确认后   会自动调confirm 方法
+     * 发送方确认模式 发消息
      */
     public void send(){
         rabbitTemplate.setConfirmCallback(this);
@@ -28,8 +28,14 @@ public class CallBackSenderService implements RabbitTemplate.ConfirmCallback {
         this.rabbitTemplate.convertAndSend("exchange", "topic.message", msg, correlationData);
     }
 
+    /**
+     * 消息确认
+     * @param correlationData
+     * @param b
+     * @param s
+     */
     @Override
     public void confirm(CorrelationData correlationData, boolean b, String s) {
-        log.info(" 回调确认：" + correlationData.getId());
+        log.info(" 消息确认标识消息ID：" + correlationData.getId());
     }
 }

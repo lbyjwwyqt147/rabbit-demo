@@ -52,6 +52,9 @@ public class TopicRabbitConfig {
      */
     @Bean
     Binding bindingExchangeMessage(Queue queueMessage, TopicExchange exchange) {
+        //第一个参数 是需要绑定的队列
+        //第二个参数 是绑定的交换机
+        //第三个参数 是路由键
         return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
     }
 
